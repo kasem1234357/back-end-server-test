@@ -9,11 +9,11 @@
   "rewrites":[
     {
       "source":"/users/",
-       "destination":"/api/users/"
+       "destination":"api/users/"
     },
     {
       "source":"/posts/:id",
-       "destination":"/api/posts/:id"
+       "destination":"api/posts/:id"
     }
   ]
 }
