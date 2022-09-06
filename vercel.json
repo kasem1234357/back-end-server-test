@@ -6,14 +6,5 @@
       "use": "@vercel/node"
     }
   ],
-  "rewrites":[
-    {
-      "source":"/users/",
-       "destination":"api/users/"
-    },
-    {
-      "source":"/posts/:id",
-       "destination":"api/posts/:id"
-    }
-  ]
+   "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
 }
