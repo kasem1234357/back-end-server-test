@@ -17,13 +17,7 @@ router.put("/:id", async (req, res) => {
       }
     }
     try {
-      let valxx ={
-        age:req.body.age,
-        city:req.body.city,
-        from:req.body.from,
-        relationship:req.body.relationship === "single"?1:2
-      }
-      const user = await User.findByIdAndUpdate(req.params.id,valxx,{
+      const user = await User.findByIdAndUpdate(req.params.id,{...req.body},{
         new: true
       });
       res.status(200).json("Account has been updated");
