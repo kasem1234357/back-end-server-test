@@ -2,18 +2,28 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
+const validReaquest = (req,res,next)=>{
+  if(Object.keys(req.body).length === 0){
+    res.status(500).json({massege:'you dont across data to the backEnd server check your code ,are you stupid?? 🤪🤪'}) 
+    return 0
+  }
+    next()
+}
 //REGISTER
-router.post("/register", async (req, res) => {
+router.post("/register",validReaquest, async (req, res) => {
+  const {password,username,email,...otherProps} = req.body
+  
   try {
     //generate new password
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     //create new user
     const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
+      username: username,
+      email: email,
       password: hashedPassword,
+       ...otherProps
     });
 
     //save user and respond
@@ -21,7 +31,7 @@ router.post("/register", async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     console.log(err)
-    res.status(500).json(err)
+    res.status(500).json({massege:'error'})
   }
 });
 

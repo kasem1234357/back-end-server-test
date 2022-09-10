@@ -17,6 +17,7 @@ router.put("/:id", async (req, res) => {
       }
     }
     try {
+      
       const user = await User.findByIdAndUpdate(req.params.id,{...req.body},{
         new: true
       });
@@ -61,7 +62,7 @@ router.delete("/:id", async (req, res) => {
     return res.status(403).json("You can delete only your account!");
   }
 });
-router.get('/all',async (req, res)=>{
+router.get('/all', (req, res)=>{
   res.status(200).json({massege:'hellooooo'})
 })
 //get a user
